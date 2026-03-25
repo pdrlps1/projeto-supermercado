@@ -3,7 +3,7 @@
 </div>
 
 <div>
-
+    <button (click)="new()">Novo</button>
 </div>
 <table>
     <thead>
@@ -19,7 +19,19 @@
     </thead>
     <tbody>
         @for (produto of produtos; track $index) {
-            
+        <tr>
+            <td>{{produto.id}}</td>
+            <td>{{produto.marca}}</td>
+            <td>{{produto.nome}}</td>
+            <td>{{produto.precoCusto}}</td>
+            <td>{{produto.precoVenda}}</td>
+            <td>{{produto.categoria}}</td>
+            <td>{{produto.estoque}}</td>
+            <td>
+                <button (click)="edit(produto)">Alterar</button>
+                <button (click)="delete(produto)">Excluir</button>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
