@@ -1,24 +1,55 @@
-<h1>Novo produto</h1>
-<form style="display: flex; flex-direction: column; width: 12.5%; gap: 8px;">
-    <label for="nome">Nome: </label>
-    <input type="text" name="nome" id="nome" [(ngModel)]="produto.nome">
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <h2 class="h4 mb-4 text-center">Cadastro de Produto</h2>
 
-    <label for="marca">Marca: </label>
-    <input type="text" name="marca" id="marca" [(ngModel)]="produto.marca">
+                <form class="row g-3">
+                    <div class="col-md-8">
+                        <label class="form-label fw-semibold">Nome do Produto</label>
+                        <input type="text" class="form-control" [(ngModel)]="produto.nome" name="nome">
+                    </div>
 
-    <label for="precoCusto">Preço de custo: </label>
-    <input type="number" name="precoCusto" id="precoCusto" [(ngModel)]="produto.precoCusto">
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Marca</label>
+                        <input type="text" class="form-control" [(ngModel)]="produto.marca" name="marca">
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label fw-semibold">Categoria</label>
+                        <input type="text" class="form-control" [(ngModel)]="produto.categoria" name="categoria">
+                    </div>
 
-    <label for="precoVenda">Preço de venda: </label>
-    <input type="number" name="precoVenda" id="precoVenda" [(ngModel)]="produto.precoVenda">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Preço de Custo</label>
+                        <div class="input-group">
+                            <span class="input-group-text">R$</span>
+                            <input type="number" class="form-control" [(ngModel)]="produto.precoCusto"
+                                name="precoCusto">
+                        </div>
+                    </div>
 
-    <label for="categoria">Categoria: </label>
-    <input type="text" name="categoria" id="categoria" [(ngModel)]="produto.categoria">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Preço de Venda</label>
+                        <div class="input-group">
+                            <span class="input-group-text">R$</span>
+                            <input type="number" class="form-control" [(ngModel)]="produto.precoVenda"
+                                name="precoVenda">
+                        </div>
+                    </div>
 
-    <label for="estoque">Quantidade: </label>
-    <input type="number" name="estoque" id="estoque" [(ngModel)]="produto.estoque">
+                    <div class="col-md-12">
+                        <label class="form-label fw-semibold">Estoque Inicial</label>
+                        <input type="number" class="form-control" [(ngModel)]="produto.estoque" name="estoque">
+                    </div>
 
-    <button type="button" (click)="submit()">Cadastrar</button>
-    <button (click)="return()">Voltar</button>
-
-</form>
+                    <div class="col-12 mt-4 d-flex gap-2">
+                        <button type="button" class="btn btn-primary w-100 py-2" (click)="submit()">Cadastrar
+                            Produto</button>
+                        <button type="button" class="btn btn-light border w-100 py-2"
+                            (click)="return()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

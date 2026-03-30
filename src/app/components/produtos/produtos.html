@@ -1,37 +1,49 @@
-<div class="produtos">
-    <h1>Produtos</h1>
-</div>
+<div class="card shadow-sm">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+        <h5 class="mb-0 text-primary fw-bold">Gerenciamento de Produtos</h5>
+        <button class="btn btn-primary btn-sm px-4" (click)="new()">
+            <i class="bi bi-plus-lg"></i> Novo Produto
+        </button>
+    </div>
 
-<div>
-    <button (click)="new()">Novo</button>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-3">ID</th>
+                        <th>Produto</th>
+                        <th>Categoria</th>
+                        <th>Preço Venda</th>
+                        <th>Estoque</th>
+                        <th class="text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (produto of produtos; track $index) {
+                    <tr>
+                        <td class="ps-3 text-muted">#{{produto.id}}</td>
+                        <td>
+                            <div class="fw-bold">{{produto.nome}}</div>
+                            <small class="text-muted">{{produto.marca}}</small>
+                        </td>
+                        <td><span class="badge rounded-pill bg-info text-dark">{{produto.categoria}}</span></td>
+                        <td class="fw-bold text-success">R${{produto.precoVenda}}</td>
+                        <td>
+                            <span [class]="(produto.estoque || 0) < 10 ? 'text-danger' : ''">
+                                {{produto.estoque}} un.
+                            </span>
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-outline-secondary btn-sm me-2"
+                                (click)="edit(produto)">Editar</button>
+                            <button class="btn btn-outline-danger btn-sm" (click)="delete(produto)">Excluir</button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Marca</th>
-            <th>Nome</th>
-            <th>Preço Custo</th>
-            <th>Preço Venda</th>
-            <th>Categoria</th>
-            <th>Estoque</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (produto of produtos; track $index) {
-        <tr>
-            <td>{{produto.id}}</td>
-            <td>{{produto.marca}}</td>
-            <td>{{produto.nome}}</td>
-            <td>{{produto.precoCusto}}</td>
-            <td>{{produto.precoVenda}}</td>
-            <td>{{produto.categoria}}</td>
-            <td>{{produto.estoque}}</td>
-            <td>
-                <button (click)="edit(produto)">Alterar</button>
-                <button (click)="delete(produto)">Excluir</button>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
