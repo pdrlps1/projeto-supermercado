@@ -14,6 +14,7 @@ export class Produtos {
   constructor(private router: Router, private service: Service) { this.getProdutos() }
 
   produtos: Array<ProdutoModel> = [];
+  produtoParaExcluir: any = null;
 
   new() {
     this.router.navigate(['/produtos/novo']);
@@ -23,9 +24,20 @@ export class Produtos {
     this.produtos = this.service.getProdutos();
   }
 
+  prepararParaExclusao(produto: any) {
+    this.produtoParaExcluir = produto;
+  }
+
   delete(produto: ProdutoModel) {
     this.service.deleteProduto(produto.id!);
     this.getProdutos();
+  }
+
+  confirmDelete() {
+    if(this.produtoParaExcluir) {
+      this.delete(this.produtoParaExcluir);
+      this.produtoParaExcluir(null);
+    };
   }
 
   edit(produto: ProdutoModel) {

@@ -37,7 +37,7 @@
                         <td class="text-center">
                             <button class="btn btn-outline-secondary btn-sm me-2"
                                 (click)="edit(produto)">Editar</button>
-                            <button class="btn btn-outline-danger btn-sm" (click)="delete(produto)">Excluir</button>
+                            <button class="btn btn-outline-danger btn-sm" (click)="prepararParaExclusao(produto)" data-bs-toggle="modal" data-bs-target="#deleteModal">Excluir</button>
                         </td>
                     </tr>
                     }
@@ -46,4 +46,30 @@
         </div>
     </div>
 
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteModalLabel text-white">Confirmar Exclusão</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body p-4 text-center">
+                <i class="bi bi-exclamation-triangle text-danger" style="font-size: 2rem;"></i>
+                <p class="mt-3">Você tem certeza que deseja excluir o produto
+                    <strong>{{produtoParaExcluir?.nome}}</strong>?
+                </p>
+                <small class="text-muted">Esta ação não poderá ser desfeita.</small>
+            </div>
+
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger px-4" (click)="confirmDelete()"
+                    data-bs-dismiss="modal">Excluir</button>
+            </div>
+        </div>
+    </div>
 </div>
