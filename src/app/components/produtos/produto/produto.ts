@@ -16,9 +16,12 @@ export class Produto {
 
   constructor(private router: Router, private service: Service, private route: ActivatedRoute) {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.id = +params.get('id')!;
-      if (this.id) {
-        this.produto = this.service.getProdutoById(this.id)!;
+      if (params.has('id')) {
+        this.id = +params.get('id')!;
+        const pd = this.service.getProdutoById(this.id);
+        if (pd) {
+          this.produto = { ...pd };
+        }
       }
     })
   }
@@ -30,7 +33,11 @@ export class Produto {
   }
 
   submit() {
-    this.service.addProdutos(this.produto);
+    if (this.id) {
+      this.service.editProduto(this.produto);
+    } else {
+      this.service.addProdutos(this.produto);
+    }
     this.return();
   }
 

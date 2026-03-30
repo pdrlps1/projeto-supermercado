@@ -29,8 +29,11 @@ export class Service {
     }
   }
 
-  editProduto () {
-    
+  editProduto (produto: ProdutoModel) {
+    const index = this.produtos.findIndex(p => p.id === produto.id);
+    if (index > -1) {
+      this.produtos[index] = produto;
+    }
   }
 
 }
