@@ -32,7 +32,16 @@ export class Produto {
     this.router.navigate(['/produtos'])
   }
 
+  errorMessage: string = '';
+
   submit() {
+    if (!this.produto.nome || this.produto.nome.trim() === '' || this.produto.precoVenda == null || this.produto.estoque == null) {
+      this.errorMessage = 'Os campos Nome, Preço de Venda e Estoque Inicial são obrigatórios.';
+      return;
+    }
+    
+    this.errorMessage = '';
+
     if (this.id) {
       this.service.editProduto(this.produto);
     } else {
