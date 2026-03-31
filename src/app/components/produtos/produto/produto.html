@@ -52,8 +52,9 @@
                     }
 
                     <div class="col-12 mt-4 d-flex gap-2">
-                        <button type="button" class="btn btn-primary w-100 py-2" (click)="submit()">Cadastrar
-                            Produto</button>
+                        <button type="button" class="btn btn-primary w-100 py-2" (click)="submit()">
+                            {{ id ? 'Salvar Alterações' : 'Cadastrar Produto' }}
+                        </button>
                         <button type="button" class="btn btn-light border w-100 py-2"
                             (click)="return()">Cancelar</button>
                     </div>

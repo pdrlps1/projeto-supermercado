@@ -6,7 +6,26 @@ import { ProdutoModel } from '../../../models/produtos';
 })
 export class Service {
   
-  produtos: Array<ProdutoModel> = [];
+  produtos: Array<ProdutoModel> = [
+    {
+      id: 1,
+      nome: 'Arroz Tipo 1',
+      marca: 'Camil',
+      categoria: 'Alimentos',
+      precoCusto: 18.00,
+      precoVenda: 25.00,
+      estoque: 100
+    },
+    {
+      id: 2,
+      nome: 'Feijão Carioca',
+      marca: 'Carunchão',
+      categoria: 'Alimentos',
+      precoCusto: 6.50,
+      precoVenda: 9.00,
+      estoque: 50
+    }
+  ];
 
   getProdutos() {
     return this.produtos
