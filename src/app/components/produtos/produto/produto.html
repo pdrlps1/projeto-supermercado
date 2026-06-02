@@ -4,42 +4,38 @@
             <div class="card-body p-4">
                 <h2 class="h4 mb-4 text-center">Cadastro de Produto</h2>
 
-                <form class="row g-3">
+                <form class="row g-3" #form="ngForm">
                     <div class="col-md-8">
                         <label class="form-label fw-semibold">Nome do Produto</label>
-                        <input type="text" class="form-control" [(ngModel)]="produto.nome" name="nome">
+                        <input type="text" class="form-control" [(ngModel)]="produto.nome" name="nome" required #nomeInput="ngModel" [class.is-invalid]="nomeInput.touched && nomeInput.invalid">
                     </div>
 
                     <div class="col-md-4">
-                        <label class="form-label fw-semibold">Marca</label>
-                        <input type="text" class="form-control" [(ngModel)]="produto.marca" name="marca">
+                        <label class="form-label fw-semibold">Código de Barras</label>
+                        <input type="text" class="form-control" [(ngModel)]="produto.codigoBarras" name="codigoBarras" required #codigoInput="ngModel" [class.is-invalid]="codigoInput.touched && codigoInput.invalid">
                     </div>
+
                     <div class="col-md-12">
                         <label class="form-label fw-semibold">Categoria</label>
-                        <input type="text" class="form-control" [(ngModel)]="produto.categoria" name="categoria">
+                        <select class="form-select" [(ngModel)]="produto.categoriaId" name="categoriaId" required #categoriaInput="ngModel" [class.is-invalid]="categoriaInput.touched && categoriaInput.invalid">
+                            <option value="" disabled selected>Selecione uma categoria...</option>
+                            @for (cat of categoriaService.categorias(); track cat.id) {
+                                <option [value]="cat.id">{{cat.nome}}</option>
+                            }
+                        </select>
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Preço de Custo</label>
+                        <label class="form-label fw-semibold">Preço</label>
                         <div class="input-group">
                             <span class="input-group-text">R$</span>
-                            <input type="number" class="form-control" [(ngModel)]="produto.precoCusto"
-                                name="precoCusto">
+                            <input type="number" class="form-control" [(ngModel)]="produto.preco" name="preco" required min="0.01" step="0.01" #precoInput="ngModel" [class.is-invalid]="precoInput.touched && precoInput.invalid">
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Preço de Venda</label>
-                        <div class="input-group">
-                            <span class="input-group-text">R$</span>
-                            <input type="number" class="form-control" [(ngModel)]="produto.precoVenda"
-                                name="precoVenda">
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
                         <label class="form-label fw-semibold">Estoque Inicial</label>
-                        <input type="number" class="form-control" [(ngModel)]="produto.estoque" name="estoque">
+                        <input type="number" class="form-control" [(ngModel)]="produto.estoque" name="estoque" required min="0" #estoqueInput="ngModel" [class.is-invalid]="estoqueInput.touched && estoqueInput.invalid">
                     </div>
 
                     @if (errorMessage) {

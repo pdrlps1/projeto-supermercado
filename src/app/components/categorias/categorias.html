@@ -1,8 +1,8 @@
 <div class="card shadow-sm">
     <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
-        <h5 class="mb-0 text-primary fw-bold">Gerenciamento de Produtos</h5>
+        <h5 class="mb-0 text-primary fw-bold">Gerenciamento de Categorias</h5>
         <button class="btn btn-primary btn-sm px-4" (click)="new()">
-            <i class="bi bi-plus-lg"></i> Novo Produto
+            <i class="bi bi-plus-lg"></i> Nova Categoria
         </button>
     </div>
 
@@ -12,40 +12,33 @@
                 <thead class="table-light">
                     <tr>
                         <th class="ps-3">ID</th>
-                        <th>Produto</th>
-                        <th>Categoria</th>
-                        <th>Preço Venda</th>
-                        <th>Estoque</th>
+                        <th>Nome da Categoria</th>
                         <th class="text-center">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @for (produto of produtos; track produto.id) {
+                    @for (categoria of categorias; track categoria.id) {
                     <tr>
-                        <td class="ps-3 text-muted" title="{{produto.id}}">#{{produto.id.substring(0, 8)}}...</td>
+                        <td class="ps-3 text-muted" title="{{categoria.id}}">#{{categoria.id.substring(0, 8)}}...</td>
                         <td>
-                            <div class="fw-bold">{{produto.nome}}</div>
-                            <small class="text-muted">Cód: {{produto.codigoBarras}}</small>
-                        </td>
-                        <td><span class="badge rounded-pill bg-info text-dark">{{getCategoriaNome(produto.categoriaId)}}</span></td>
-                        <td class="fw-bold text-success">{{produto.preco | currency:'BRL'}}</td>
-                        <td>
-                            <span [class]="(produto.estoque || 0) < 10 ? 'text-danger' : ''">
-                                {{produto.estoque}} un.
-                            </span>
+                            <div class="fw-bold">{{categoria.nome}}</div>
                         </td>
                         <td class="text-center">
                             <button class="btn btn-outline-secondary btn-sm me-2"
-                                (click)="edit(produto)">Editar</button>
-                            <button class="btn btn-outline-danger btn-sm" (click)="prepararParaExclusao(produto)" data-bs-toggle="modal" data-bs-target="#deleteModal">Excluir</button>
+                                (click)="edit(categoria)">Editar</button>
+                            <button class="btn btn-outline-danger btn-sm" (click)="prepararParaExclusao(categoria)" data-bs-toggle="modal" data-bs-target="#deleteModal">Excluir</button>
                         </td>
+                    </tr>
+                    }
+                    @if (categorias.length === 0) {
+                    <tr>
+                        <td colspan="3" class="text-center text-muted py-4">Nenhuma categoria cadastrada.</td>
                     </tr>
                     }
                 </tbody>
             </table>
         </div>
     </div>
-
 </div>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -59,8 +52,8 @@
 
             <div class="modal-body p-4 text-center">
                 <i class="bi bi-exclamation-triangle text-danger" style="font-size: 2rem;"></i>
-                <p class="mt-3">Você tem certeza que deseja excluir o produto
-                    <strong>{{produtoParaExcluir?.nome}}</strong>?
+                <p class="mt-3">Você tem certeza que deseja excluir a categoria
+                    <strong>{{categoriaParaExcluir?.nome}}</strong>?
                 </p>
                 <small class="text-muted">Esta ação não poderá ser desfeita.</small>
             </div>
